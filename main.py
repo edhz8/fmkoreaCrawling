@@ -9,7 +9,7 @@ from urllib.request import urlretrieve
 from bs4 import BeautifulSoup as bs
 driver,fm_url=None,None
 def open_site(): 
-    url="https://www.fmkorea.com/gallery_girlgroup"
+    url="https://www.fmkorea.com/gallery_girlgroup" #크롤링하고싶은 주소를 입력한다. 여기서는 테스트를 위해 걸그룹갤러리를 입력했다.
     html=requests.get(url)
     soup=bs(html.text,'html.parser')
     data1=soup.find('tbody')
@@ -23,11 +23,11 @@ def log_in():
     global driver,fm_url
     options = Options()
     options.add_argument('--start-fullscreen')
-    driver = webdriver.Chrome(executable_path='C:/Users/edhz8/OneDrive/바탕 화면/fmCamp/chromedriver', chrome_options=options)
+    driver = webdriver.Chrome(executable_path='', chrome_options=options) #executable_path에 크롬드라이버의 위치를 저장한다.
     fm_url='https://www.fmkorea.com/'
     driver.get(fm_url)
-    id='edhz8888'
-    pw='$hassk@9797'
+    id='' #id 및 pw 입력.
+    pw=''
 
     driver.find_element_by_xpath('//*[@id="header"]/div/div[2]/form/input[4]').send_keys(id)
     driver.find_element_by_xpath('//*[@id="header"]/div/div[2]/form/input[5]').send_keys(pw)
@@ -55,7 +55,7 @@ def move_to_page(limit):
             elif temp[-4:]=='.mp4':
                 tempmp4.append(i)
                 
-        for j in tempmp4:
+        for j in tempmp4:   #이부분은 만약에 같은제목으로 .jpg나 .gif가 있다면 mp4는 다운받지않고, 없다면 mp4를 다운받게 만드는 부분이다.
             down=True
             tempj=j.text
             for k in temppic:
@@ -81,7 +81,7 @@ def move_to_page(limit):
         time.sleep(random.random()+2)
         driver.execute_script("return go_to_next_('next');")
     #driver.quit()
-    os.system('start c:/Users/edhz8/Downloads')
+    os.system('start c:/~~~~~')#다운로드할 위치를 입력한다.
 
 log_in()
 open_site()
